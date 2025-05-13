@@ -1,0 +1,21 @@
+/**
+  This is auto-generated file.  If any change, make it to graphql/templates/schema/resolver.ts.ejs
+*/
+import type * as Schema from '../generated/graphql';
+
+export default {
+  Query: {
+    <%= dsName %>: async (_parent, args, { dataSources: { <%= dsName %>Api } }) => {
+      const response = await <%= dsName %>Api.find<%= capitalizeDsName %>ById(args.id);
+      return response;
+    },
+    <%= dsName %>Stats: async (_parent, args, { dataSources: { <%= dsName %>Api } }) => {
+      return {
+        lastPosition: await <%= dsName %>Api.stats()
+      }
+    },
+    <%= dsName %>ByRange: async (_parent, args, { dataSources: { <%= dsName %>Api } }) => {
+      return await <%= dsName %>Api.find<%= capitalizeDsName %>ByRange(args.start, args.end);
+    },    
+  } satisfies Schema.QueryResolvers 
+};

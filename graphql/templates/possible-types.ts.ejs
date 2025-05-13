@@ -1,0 +1,10 @@
+/**
+  This is auto-generated file.  If any change, make it to graphql/templates/possible-types.ts.ejs
+*/
+import {
+<% dataSources.forEach(function({ capitalizeDsName }) { -%>
+  <%= capitalizeDsName %>,
+<% }); -%>
+} from '../schema/generated/graphql';
+
+export type possibleQueryResponse = <%= dataSources.map(({capitalizeDsName}) => capitalizeDsName).join(' | ') %>;

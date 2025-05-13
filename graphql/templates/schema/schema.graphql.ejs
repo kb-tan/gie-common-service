@@ -1,0 +1,20 @@
+schema {
+  query: Query
+}
+  
+type Query {
+  <%= dsName %>(id: ID!): <%= dsName %>
+  <%= dsName %>ByRange(start: Int, end: Int): [<%= dsName %>]
+  <%= dsName %>Stats: <%= dsName %>Stats
+}
+  
+type <%= dsName %> {
+  id: ID!
+<% fields.forEach(function({fieldName, fieldType}) { -%>
+  <%= fieldName -%>: <%= fieldType -%>! 
+<% }); -%>
+}
+
+type <%= dsName %>Stats {
+  lastPosition: Int
+}

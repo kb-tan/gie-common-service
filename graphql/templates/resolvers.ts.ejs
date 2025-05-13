@@ -1,0 +1,14 @@
+/**
+  This is auto-generated file.  If any change, make it to graphql/templates/resolvers.ts.ejs
+*/
+
+
+<% resolvers.forEach(function(resolver) { -%>
+import * as <%= resolver %> from './<%= resolver %>/resolvers';
+<% }); -%>
+
+export const resolvers = [
+<% resolvers.forEach(function(resolver) { -%>
+  <%= resolver %>,
+<% }); -%>
+]

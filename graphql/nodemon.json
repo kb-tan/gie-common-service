@@ -1,0 +1,11 @@
+{
+    "watch": ["src"],
+    "ext": "ts, graphql",
+    "ignore": ["src/**/*.spec.ts"],
+    "env": {
+      "IS_LOCAL": "true",
+      "PRETTY_PINO": "true"
+    },
+    "exec": "ts-node -T --require ./src/api.ts"
+  }
+  

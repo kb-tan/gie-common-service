@@ -1,0 +1,40 @@
+type Query {
+  """
+  Get a book
+  
+  Equivalent to GET /books/{bookId}
+  """
+  getBook(
+    """ID of the book to retrieve"""
+    bookId: String!
+  ): Book
+
+  """
+  List all books
+  
+  Equivalent to GET /books
+  """
+  listBooks: [Book]
+}
+
+type Book {
+  author: String!
+  id: String!
+  publishedYear: Int
+  title: String!
+}
+
+type Mutation {
+  """
+  Add a new book
+  
+  Equivalent to POST /books
+  """
+  addBook(newBookInput: NewBookInput!): Book
+}
+
+input NewBookInput {
+  author: String!
+  publishedYear: Int
+  title: String!
+}

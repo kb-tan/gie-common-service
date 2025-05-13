@@ -1,0 +1,23 @@
+{
+  "name": "data-service-graphql",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run clean && tsc --build --verbose",
+    "copy-schema": "find src -name *.graphql -exec mkdir -p ./dist/{} \\; -exec cp -r {} ./dist/{} \\;",
+    "start:local": "nodemon",
+    "clean": "rm -rf ./dist",
+    "start": "npm run clean && tsc && npm run copy-schema && node ./dist/api.js",
+    "generate-client": "ts-node templates/generator/client-generator.ts",
+    "generate-resolver": "ts-node templates/generator/resolver-generator.ts",
+    "generate-type": "graphql-codegen",
+    "demo": "npm run generate-client && npm run generate-resolver && npm run generate-type"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
+}

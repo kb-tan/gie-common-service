@@ -1,0 +1,12 @@
+FROM --platform=${BUILDPLATFORM:-arm64} node:20-alpine AS dev-deps
+
+WORKDIR /workdir
+
+COPY package.json pnpm-lock.yaml ./
+
+# Install curl if it's not already in the image, as it's needed to fetch the Volta installer
+RUN npm i -g pnpm
+
+RUN \
+  --mount=type=secret,id=npm,dst=/root/.npmrc \
+  pnpm install --frozen-lockfile

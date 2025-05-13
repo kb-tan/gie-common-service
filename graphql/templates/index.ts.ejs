@@ -1,0 +1,27 @@
+/**
+  This is auto-generated file.  If any change, make it to graphql/templates/index.ts.ejs
+*/
+
+import type { KeyValueCache } from '@apollo/utils.keyvaluecache';
+import type { IRequestContext } from '../types';
+import { EventStore } from './eventstore';
+
+<% dataSources.forEach(function(dsName) { -%>
+import <%= dsName %> from '../schema/<%= dsName %>/data-source';
+<% }); -%>
+
+export const getDataSources = (
+    cache: KeyValueCache,
+    context: IRequestContext,
+  ) => {
+    // const conf = {
+    //   cache,
+    //   context,
+    // };
+  const evtStore = new EventStore(); 
+  return {
+<% dataSources.forEach(function(dsName) { -%>
+    <%= dsName %>Api: new <%= dsName %>(cache, context, evtStore, "<%= dsName %>"),
+<% }); -%>
+  }
+}

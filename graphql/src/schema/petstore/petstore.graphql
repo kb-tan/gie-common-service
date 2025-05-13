@@ -1,0 +1,86 @@
+type Query {
+  """
+  Multiple status values can be provided with comma separated strings.
+  
+  Equivalent to GET /pet/findByStatus
+  """
+  findPetsByStatus(
+    """Status values that need to be considered for filter"""
+    status: Status2
+  ): [Pet]
+}
+
+type Pet {
+  category: Category
+  id: BigInt
+  name: String!
+  photoUrls: [String]!
+
+  """pet status in the store"""
+  status: Status
+  tags: [Tag]
+}
+
+type Category {
+  id: BigInt
+  name: String
+}
+
+"""
+The `BigInt` scalar type represents non-fractional signed whole numeric values.
+"""
+scalar BigInt
+
+enum Status {
+  AVAILABLE
+  PENDING
+  SOLD
+}
+
+type Tag {
+  id: BigInt
+  name: String
+}
+
+enum Status2 {
+  AVAILABLE
+  PENDING
+  SOLD
+}
+
+type Mutation {
+  """
+  Add a new pet to the store.
+  
+  Equivalent to POST /pet
+  """
+  addPet(petInput: PetInput!): Pet
+
+  """
+  Update an existing pet by Id.
+  
+  Equivalent to PUT /pet
+  """
+  updatePet(petInput: PetInput!): Pet
+}
+
+input PetInput {
+  category: CategoryInput
+  id: BigInt
+  name: String!
+  photoUrls: [String]!
+
+  """pet status in the store"""
+  status: Status
+  tags: [TagInput]
+}
+
+input CategoryInput {
+  id: BigInt
+  name: String
+}
+
+input TagInput {
+  id: BigInt
+  name: String
+}

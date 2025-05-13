@@ -1,0 +1,47 @@
+type Query {
+  """
+  Retrieve a greeting message by ID
+  
+  Equivalent to GET /helloworld/{messageId}
+  """
+  getHelloworldMessageById(
+    """The ID of the message to retrieve"""
+    messageId: Int!
+  ): Message
+
+  """
+  List all greeting messages
+  
+  Equivalent to GET /helloworld
+  """
+  listHelloworldMessages: [Message]
+}
+
+type Message {
+  content: String
+  id: Int
+}
+
+type Mutation {
+  """
+  Create a new greeting message
+  
+  Equivalent to POST /helloworld
+  """
+  createHelloworldMessage(messageInput2Input: MessageInput2Input!): Message
+
+  """
+  Update a greeting message
+  
+  Equivalent to PUT /helloworld/{messageId}
+  """
+  updateHelloworldMessage(
+    """The ID of the message to update"""
+    messageId: Int!
+    messageInput2Input: MessageInput2Input!
+  ): Message
+}
+
+input MessageInput2Input {
+  content: String!
+}

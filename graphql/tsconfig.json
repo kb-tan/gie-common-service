@@ -1,0 +1,41 @@
+{
+    "ts-node": {
+      "files": true,
+      "require": ["tsconfig-paths/register"]
+    },
+    "compilerOptions": {
+      "module": "CommonJS",
+      "target": "ESNext",
+      "resolveJsonModule": true,
+      "outDir": "./dist",
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "removeComments": true,
+      "preserveConstEnums": true,
+      "sourceMap": true,
+      "noUnusedParameters": false,
+      "lib": [
+        "ESNext",
+        "dom",
+        "esnext.asynciterable",
+        "ESNext.Intl",
+        "esnext.intl"
+      ],
+      "baseUrl": ".", 
+      "paths": {
+        "@libs/*": ["../foundation/src/libs/*"],
+        "@schema/*": ["../foundation/src/schema/*"],
+
+      },
+      "typeRoots": ["src/@types", "node_modules/@types"]
+    },
+    "include": ["src/**/*", "src/**/**/*", "src/**/*.json", "src/**/*.graphql"],
+    "exclude": [
+      "node_modules",
+      "**/*.spec.ts",
+      "src/@types",
+      "src/**/__mocks__*",
+      "src/**/**/__mocks__*"
+    ]
+  }
+  

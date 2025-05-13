@@ -1,0 +1,188 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Hello World API",
+      "description": "A simple API to manage 'Hello World' messages.",
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "https://api.helloworld.com/v1"
+      }
+    ],
+    "paths": {
+      "/helloworld": {
+        "get": {
+          "summary": "List all greeting messages",
+          "operationId": "listHelloworldMessages",
+          "responses": {
+            "200": {
+              "description": "A list of greeting messages",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Create a new greeting message",
+          "operationId": "createHelloworldMessage",
+          "requestBody": {
+            "description": "Message to create",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageInput"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Successfully created a greeting message",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Message"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/helloworld/{messageId}": {
+        "get": {
+          "summary": "Retrieve a greeting message by ID",
+          "operationId": "getHelloworldMessageById",
+          "parameters": [
+            {
+              "name": "messageId",
+              "in": "path",
+              "required": true,
+              "description": "The ID of the message to retrieve",
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successfully retrieved the message",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Message"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Message not found"
+            }
+          }
+        },
+        "put": {
+          "summary": "Update a greeting message",
+          "operationId": "updateHelloworldMessage",
+          "parameters": [
+            {
+              "name": "messageId",
+              "in": "path",
+              "required": true,
+              "description": "The ID of the message to update",
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "requestBody": {
+            "description": "Updated message content",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageInput"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Successfully updated the message",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Message"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Message not found"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete a greeting message",
+          "operationId": "deleteHelloworldMessage",
+          "parameters": [
+            {
+              "name": "messageId",
+              "in": "path",
+              "required": true,
+              "description": "The ID of the message to delete",
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "Successfully deleted the message"
+            },
+            "404": {
+              "description": "Message not found"
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Message": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "example": 1
+            },
+            "content": {
+              "type": "string",
+              "example": "Hello, World!"
+            }
+          }
+        },
+        "MessageInput": {
+          "type": "object",
+          "properties": {
+            "content": {
+              "type": "string",
+              "example": "Hello, World!"
+            }
+          },
+          "required": [
+            "content"
+          ]
+        }
+      }
+    }
+  }

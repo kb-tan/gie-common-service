@@ -1,0 +1,16 @@
+schema: ./src/schema/*/**/*.graphql
+extensions:
+  codegen:
+    generates:
+      ./src/schema/generated/graphql.ts:
+        config:
+          scalars:
+            ID: string 
+          namingConvention: change-case-all#pascalCase
+        plugins:
+          - add:
+              content: /* eslint-disable */
+          - typescript:
+              useImplementingTypes: true
+          - typescript-resolvers:
+              contextType: '../../types#Context'

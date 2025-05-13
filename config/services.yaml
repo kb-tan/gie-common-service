@@ -1,0 +1,5 @@
+services:
+  name: petstore
+  schema: ./petstore.schema.json 
+  endpointType: HTTP 
+  endpoint:

@@ -1,0 +1,28 @@
+/**
+  This is auto-generated file.  If any change, make it to graphql/templates/schema/data-source.ts.ejs
+*/
+import type { KeyValueCache } from '@apollo/utils.keyvaluecache';
+import type { IRequestContext } from '../../types';
+import * as api from './generated';
+import { EventStore } from 'src/data-source/eventstore';
+
+export default class API {
+    private evtStore: EventStore; 
+    private api: api.DefaultApi;
+    private serviceName: string;
+    constructor(cache: KeyValueCache, context: IRequestContext, evtStore: EventStore, serviceName: string) {
+      this.evtStore = evtStore;
+      this.api = new api.DefaultApi();
+      this.serviceName = serviceName;
+    }
+    
+  <% fields.forEach(function(fieldName) { -%>
+  async <%= fieldName %>(args): Promise<any> {
+      //TODO: Implement the <%= fieldName %> method
+      this.evtStore.publishEvent(args, this.serviceName);
+      this.api.<%= fieldName %>(args);
+      console.log('Datasource: API.<%= fieldName %> called');
+      return {};
+    }
+  <% }); -%>    
+}

@@ -1,0 +1,20 @@
+/**
+  This is auto-generated file.  If any change, make it to templates/types.ts.ejs
+*/
+
+<% dataSources.forEach(function(dsName) { -%>
+import type <%= dsName -%>Api from './schema/<%= dsName -%>/data-source';
+<% }); %>
+
+export interface IDataSources {
+<% dataSources.forEach(function(dsName) { -%>
+  <%= dsName -%>Api: <%= dsName -%>Api;
+<% }); -%>
+}
+
+export type IRequestContext = {
+}
+
+export type Context = {
+  dataSources: IDataSources;
+};
